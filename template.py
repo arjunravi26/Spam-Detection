@@ -5,7 +5,7 @@ import logging
 
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
-project_name = "text_summarizer"
+project_name = "spam_detection"
 
 list_of_files = [
     ".github/workflow/.gitkeep",
@@ -15,7 +15,7 @@ list_of_files = [
     f"src/{project_name}/utils/common.py",
     f"src/{project_name}/logging/__init__.py",
     f"src/{project_name}/config/__init__.py",
-    f"src/{project_name}/congig/configuration.py",
+    f"src/{project_name}/config/configuration.py",
     f"src/{project_name}/pipeline/__init__.py",
     f"src/{project_name}/entity/__init__.py",
     f"src/{project_name}/constant/__init__.py",

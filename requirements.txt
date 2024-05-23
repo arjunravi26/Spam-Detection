@@ -4,3 +4,7 @@ numpy
 scikit-learn
 nltk
 tqdm
+notebook
+scipy==1.9.3
+matplotlib
+seaborn

@@ -1,0 +1,14 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  data_path: artifacts/data_ingestion/data.csv
+  train_path: artifacts/data_ingestion/train.csv
+  validation_path: artifacts/data_ingestion/validation.csv
+  test_path: artifacts/data_ingestion/test.csv
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  train_path: artifacts/data_transformation/train.csv
+  validation_path: artifacts/data_transformation/validation.csv
+  test_path: artifacts/data_transformation/test.csv

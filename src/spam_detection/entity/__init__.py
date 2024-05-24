@@ -15,3 +15,8 @@ class DataTransformationConfig:
     test_path:str
     validation_path:str
     model_path:str
+    
+@dataclass
+class ModelTrainerConfig:
+    root_dir:Path
+    model_path:str

@@ -31,11 +31,17 @@ class DataTransformation:
     
     def transform_dataset(self,data):
         corpus = [self.preprocess_text(message) for message in data['message']]
+        y = data[list(map(lambda x: len(x)>0,corpus))]
+        y = pd.get_dummies(y['label'])
+        y = y.iloc[:,0].values
         words = [simple_preprocess(sent) for doc in corpus for sent in sent_tokenize(doc)]
-        return words
-    def save_transformed_data(self,path, X):
-        np.save(path,X)
+        return words,y
+    def save_transformed_data(self,path,X,y):
+        df = pd.concat([pd.DataFrame(x.reshape(1, -1)) for x in X], ignore_index=True)
+        df['output'] = y
+        df.to_csv(path,index=False)
         logging.info(f"Transformed data saved to {path}")
+
         
     def save_model(self, model, path):
         with open(path, 'wb') as file:
@@ -59,9 +65,10 @@ class DataTransformation:
             validation_data = pd.read_csv(data_ingestion_config.validation_path)
     
             
-            train_words = self.transform_dataset(train_data)
-            test_words = self.transform_dataset(test_data)
-            validation_words = self.transform_dataset(validation_data)
+            train_words,train_y = self.transform_dataset(train_data)
+            test_words,test_y = self.transform_dataset(test_data)
+            validation_words,validation_y = self.transform_dataset(validation_data)
+        
             
             self.word2vec_model = Word2Vec(sentences=train_words,vector_size=100,window=5,min_count=1)
             self.save_model(self.word2vec_model,self.config.model_path)
@@ -70,9 +77,9 @@ class DataTransformation:
             X_test = [avg_word2vec(doc,self.word2vec_model) for doc in tqdm(test_words)]
             X_val = [avg_word2vec(doc,self.word2vec_model) for doc in tqdm(validation_words)]
             
-            self.save_transformed_data(self.config.train_path,X_train)
-            self.save_transformed_data(self.config.test_path,X_test)
-            self.save_transformed_data(self.config.validation_path,X_val)
+            self.save_transformed_data(self.config.train_path,X_train,train_y)
+            self.save_transformed_data(self.config.test_path,X_test,test_y)
+            self.save_transformed_data(self.config.validation_path,X_val,validation_y)
         
         except Exception as e:
             logging.error(f"Error in data transformation: {e}")

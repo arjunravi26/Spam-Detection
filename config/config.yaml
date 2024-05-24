@@ -9,6 +9,7 @@ data_ingestion:
 
 data_transformation:
   root_dir: artifacts/data_transformation
-  train_path: artifacts/data_transformation/train.csv
-  validation_path: artifacts/data_transformation/validation.csv
-  test_path: artifacts/data_transformation/test.csv
+  train_path: artifacts/data_transformation/train.npy
+  validation_path: artifacts/data_transformation/validation.npy
+  test_path: artifacts/data_transformation/test.npy
+  model_path: artifacts/data_transformation/model.pkl

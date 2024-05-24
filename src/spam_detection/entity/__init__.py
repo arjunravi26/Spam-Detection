@@ -14,3 +14,4 @@ class DataTransformationConfig:
     train_path:str
     test_path:str
     validation_path:str
+    model_path:str

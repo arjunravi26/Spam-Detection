@@ -1,4 +1,4 @@
-from src.spam_detection.entity import DataIngestionConfig
+from src.spam_detection.entity import DataIngestionConfig,DataTransformationConfig
 from src.spam_detection.utils.common import *
 from src.spam_detection.constant import *
 
@@ -20,11 +20,13 @@ class ConfiguaraionManager:
         )
         return self.data_ingestion_config
     
-    def data_transformation(self) -> DataIngestionConfig:
+    def data_transformation(self) -> DataTransformationConfig:
         config = self.config.data_transformation
         create_directory([config.root_dir])
-        self.data_ingestion_config = DataIngestionConfig(
+        self.data_ingestion_config = DataTransformationConfig(
             root_dir=config.root_dir,train_path = config.train_path,
-            test_path = config.test_path, validation_path = config.validation_path
+            test_path = config.test_path, validation_path = config.validation_path,
+            model_path = config.model_path
+            
         )
         return self.data_ingestion_config

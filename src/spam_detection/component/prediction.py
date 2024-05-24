@@ -1,7 +1,5 @@
 from src.spam_detection.pipeline.stage_02_data_transformation import DataTransformationPipeline
-import pickle
 from src.spam_detection.config.configuration import ConfiguaraionManager
-from sklearn.base import BaseEstimator
 import pandas as pd
 from src.spam_detection.utils.common import *
 

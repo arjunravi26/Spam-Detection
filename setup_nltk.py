@@ -1,22 +1,31 @@
 import nltk
-import gensim
-from gensim.utils import simple_preprocess
-from gensim.models import Word2Vec
 import gensim.downloader as api
 from src.spam_detection.utils.common import save_model
 from src.spam_detection.config.configuration import ConfiguaraionManager
+from tqdm import tqdm
+import gensim
+import gensim.downloader as api
 
 # List of resources to download
 resources = ['wordnet', 'punkt', 'stopwords']
 
 # Download the necessary NLTK resources
-for resource in resources:
+for resource in tqdm(resources, desc='Downloading NLTK resources'):
     nltk.download(resource)
     
-word2vec_model = api.load('word2vec-google-news-300')
+print("Loading Word2Vec model...")
+# word2vec_model = api.load('word2vec-google-news-300')
+word2vec_model = api.load("word2vec-google-news-300")
+
+print("Word2Vec model loaded.")
+
 config = ConfiguaraionManager()
 data_path = config.data_transformation()
+
+print("Saving model...")
 save_model(word2vec_model,data_path.model_path)
+print("Model saved.")
+
 
 
 

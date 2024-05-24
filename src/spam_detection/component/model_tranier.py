@@ -1,5 +1,4 @@
-from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier,RandomForestClassifier
-from src.spam_detection.config.configuration import ConfiguaraionManager
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score
 from src.spam_detection.logging import logging
 import pickle

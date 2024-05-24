@@ -2,9 +2,7 @@ from src.spam_detection.entity import DataTransformationConfig
 from nltk.stem import WordNetLemmatizer
 from src.spam_detection.config.configuration import ConfiguaraionManager
 from nltk import sent_tokenize
-import gensim
 from gensim.utils import simple_preprocess
-from gensim.models import Word2Vec
 import re
 import pandas as pd
 from tqdm import tqdm

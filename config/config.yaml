@@ -17,4 +17,4 @@ data_transformation:
 
 model_tranier:
   root_dir: artifacts/model_tranier
-  model_path: artifacts/data_transformation/rf_model.pkl
+  model_path: artifacts/model_tranier/rf_model.pkl

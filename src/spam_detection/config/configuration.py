@@ -31,9 +31,9 @@ class ConfiguaraionManager:
         )
         return self.data_ingestion_config
     def model_trainer(self) -> ModelTrainerConfig:
-        config = self.config.data_transformation
+        config = self.config.model_tranier
         create_directory([config.root_dir])
-        self.data_ingestion_config = DataTransformationConfig(
+        self.data_ingestion_config = ModelTrainerConfig(
             root_dir=config.root_dir,
             model_path = config.model_path
             

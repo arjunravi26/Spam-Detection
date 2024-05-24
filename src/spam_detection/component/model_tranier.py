@@ -1,9 +1,10 @@
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier,RandomForestClassifier
 from src.spam_detection.config.configuration import ConfiguaraionManager
 from sklearn.metrics import accuracy_score
 from src.spam_detection.logging import logging
 import pickle
 import pandas as pd
+from src.spam_detection.utils.common import *
 class ModelTrainer:
     def __init__(self,config) -> None:
          self.config = config 
@@ -12,7 +13,8 @@ class ModelTrainer:
         self.y = data['output']
         
     def model_train(self):
-        self.model = RandomForestClassifier()
+        # Gradient Boosting
+        self.model = GradientBoostingClassifier(n_estimators=100, random_state=42)
         self.model.fit(self.X,self.y )
         
     def evaluate(self,data):
@@ -33,7 +35,11 @@ class ModelTrainer:
         self.model_train()
         score = self.evaluate(eval_data)
         logging.warning(f'Random Forest have {score} score')
-        self.save_model()
+        # self.save_model()
+    def final_train(self,df):
+        self.split(df)
+        self.model_train()
+        save_model(self.model,self.config.model_path)
         
         
     

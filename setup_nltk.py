@@ -23,7 +23,3 @@ data_path = config.data_transformation()
 print("Saving model...")
 word2vec_model.save(data_path.model_path)
 print("Model saved.")
-
-
-
-

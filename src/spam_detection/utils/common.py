@@ -51,7 +51,7 @@ def get_size(file_path) -> str:
     return f"file size is {size_in_kb}"
 @ensure_annotations
 
-def save_data(self,path,X,y):
+def save_data(path,X,y):
     df = pd.concat([pd.DataFrame(x.reshape(1, -1)) for x in X], ignore_index=True)
     df['output'] = y
     df.to_csv(path,index=False)

@@ -12,7 +12,5 @@ PyYAML
 matplotlib
 seaborn
 pathlib
-nltk.download('wordnet')
-nltk.download('punkt')
-nltk.download('stopwords')
+flask
 

@@ -35,13 +35,14 @@ class DataTransformation:
     
     def transform_dataset(self, data: pd.DataFrame):
         corpus = [self.preprocess_text(message) for message in data['message']]
-        data = data[corpus]
-        y = pd.get_dummies(data['label'], drop_first=True).values.ravel()
+        y = data[list(map(lambda x: len(x)>0,corpus))]
+        y = pd.get_dummies(y['label'])
+        y = y.iloc[:,0].values
         words = [simple_preprocess(sent) for doc in corpus for sent in sent_tokenize(doc)]
         return words, y
 
     def avg_word2vec(self, doc):
-        vectors = [self.word2vec_model.wv[word] for word in doc if word in self.word2vec_model.wv.key_to_index]
+        vectors = [self.word2vec_model[word] for word in doc if word in self.word2vec_model.key_to_index]
         return np.mean(vectors, axis=0) if vectors else np.zeros(self.word2vec_model.vector_size)
     
     def preprocess_data(self):

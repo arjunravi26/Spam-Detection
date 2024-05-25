@@ -7,7 +7,8 @@ import warnings
 from datetime import datetime
 
 class SpamDetector:
-    def __init__(self)->None:
+    def __init__(self,model)->None:
+        self.model = model
         pass
     def train(self)->None:
         data_ingestion_pipeline = DataIngestionPipeline()
@@ -16,15 +17,10 @@ class SpamDetector:
         data_transformation_pipeline.start()
         model_training_pipeline = ModelTrainingPipeline()
         model_training_pipeline.start()
-    def predict(self, message):
-        # Instantiate a PredictionPipeline object with the message
-        predict_pipeline = PredictionPipeline(message)
-        
-        # Get the current time before starting the prediction
+    def detect(self, message):
+        predict_pipeline = PredictionPipeline(message,self.model)
         start_time = datetime.now()
         print(start_time)
-        
-        # Start the prediction pipeline
         output = predict_pipeline.start()
         
         # Determine the result based on the output
@@ -33,24 +29,19 @@ class SpamDetector:
         else:
             result = "Spam"
         
-        # Get the current time after completing the prediction
         end_time = datetime.now()
         print(end_time)
-        
-        # Calculate the time taken for prediction
         time_taken = end_time - start_time
         print(f"Time taken is {time_taken}")
-        
-        # Return the result
         return result
 
 
-if __name__ == "__main__":
-    spam_dectector = SpamDetector()
-    msg = input("Enter a message to check if it is spam or not: ")
-    if not msg:
-        msg = "Special offer just for you! Get 50% off on all products. Visit our website now!"
-    print(spam_dectector.predict(message=msg))
+# if __name__ == "__main__":
+#     spam_dectector = SpamDetector()
+#     msg = input("Enter a message to check if it is spam or not: ")
+#     if not msg:
+#         msg = "Special offer just for you! Get 50% off on all products. Visit our website now!"
+#     print(spam_dectector.predict(message=msg))
     
     
     

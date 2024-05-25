@@ -1,20 +1,17 @@
 from src.spam_detection.pipeline.stage_02_data_transformation import DataTransformationPipeline
-from src.spam_detection.config.configuration import ConfiguaraionManager
 import pandas as pd
 from src.spam_detection.utils.common import *
 
 class Prediction:
-    def __init__(self) -> None:
-        config = ConfiguaraionManager() 
-        model_path_config = config.model_trainer()
-        self.model = load_model(model_path_config.model_path)
+    def __init__(self,model) -> None:
+        self.model = model
         self.preprocess_pipeline = DataTransformationPipeline()
 
     def preprocess(self, data: pd.DataFrame) -> pd.DataFrame:
         """Preprocesses the data using the DataTransformationPipeline."""
         if data is None:
             raise ValueError("Input data cannot be None.")
-        preprocessed_data = self.preprocess_pipeline.predict_transform(data)  # Ensure transform method exists in the pipeline
+        preprocessed_data = self.preprocess_pipeline.predict_transform(data)
         return preprocessed_data
 
     def model_predict(self, predict_data: pd.DataFrame) -> pd.Series:

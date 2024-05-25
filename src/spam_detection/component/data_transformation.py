@@ -3,6 +3,7 @@ from nltk.stem import WordNetLemmatizer
 from src.spam_detection.config.configuration import ConfiguaraionManager
 from nltk import sent_tokenize
 from gensim.utils import simple_preprocess
+from gensim.models import KeyedVectors
 import re
 import pandas as pd
 from tqdm import tqdm
@@ -56,7 +57,7 @@ class DataTransformation:
             #self.word2vec_model = gensim.models.KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin', binary=True)
 
             if self.word2vec_model is None:
-                self.word2vec_model = load_model(self.config.model_path)
+                self.word2vec_model = KeyedVectors.load(self.config.model_path)
             X_train = [avg_word2vec(doc,self.word2vec_model) for doc in tqdm(train_words)]
             X_test = [avg_word2vec(doc,self.word2vec_model) for doc in tqdm(test_words)]
             X_val = [avg_word2vec(doc,self.word2vec_model) for doc in tqdm(validation_words)]
@@ -77,7 +78,7 @@ class DataTransformation:
             if isinstance(data, list):
                 new_data = pd.Series(data)
             if self.word2vec_model is None:
-                self.word2vec_model = load_model(self.config.model_path)
+                self.word2vec_model = KeyedVectors.load(self.config.model_path)
             data = pd.DataFrame({'message': new_data})
             corpus = [self.preprocess_text(message) for message in data['message']]
             words = [simple_preprocess(sent) for doc in corpus for sent in sent_tokenize(doc)]

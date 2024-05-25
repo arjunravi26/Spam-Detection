@@ -1,9 +1,7 @@
 import nltk
 import gensim.downloader as api
-from src.spam_detection.utils.common import save_model
 from src.spam_detection.config.configuration import ConfiguaraionManager
 from tqdm import tqdm
-import gensim
 import gensim.downloader as api
 
 # List of resources to download
@@ -23,7 +21,7 @@ config = ConfiguaraionManager()
 data_path = config.data_transformation()
 
 print("Saving model...")
-save_model(word2vec_model,data_path.model_path)
+word2vec_model.save(data_path.model_path)
 print("Model saved.")
 
 

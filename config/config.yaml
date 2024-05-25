@@ -12,7 +12,7 @@ data_transformation:
   train_path: artifacts/data_transformation/train.csv
   validation_path: artifacts/data_transformation/validation.csv
   test_path: artifacts/data_transformation/test.csv
-  model_path: artifacts/data_transformation/word2vec_model.pkl
+  model_path: artifacts/data_transformation/word2vec_model.model
 
 
 model_tranier:

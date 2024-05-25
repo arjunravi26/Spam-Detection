@@ -46,7 +46,7 @@ class DataTransformation:
     
     def preprocess_data(self):
         try:
-            config = ConfigurationManager()
+            config = ConfiguaraionManager()
             data_ingestion_config = config.data_ingestion()
             
             train_data = pd.read_csv(data_ingestion_config.train_path)

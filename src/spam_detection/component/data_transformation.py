@@ -12,20 +12,10 @@ from src.spam_detection.logging import logging
 from src.spam_detection.utils.common import save_data
 
 class DataTransformation:
-    def __init__(self, config: DataTransformationConfig) -> None:
+    def __init__(self, config: DataTransformationConfig,model:KeyedVectors) -> None:
         self.config = config
+        self.model = model
         self.lemmatizer = WordNetLemmatizer()
-        self.word2vec_model = self.load_word2vec_model(config.model_path)
-        
-    def load_word2vec_model(self, path: str) -> KeyedVectors:
-        try:
-            print("Loading Word2Vec model...")
-            word2vec_model = KeyedVectors.load(path)
-            print("Word2Vec model loaded.")
-            return word2vec_model
-        except Exception as e:
-            logging.error(f"Error loading Word2Vec model: {e}")
-            raise e
     
     def preprocess_text(self, text: str) -> str:
         text = re.sub('[^A-Za-z]', ' ', text)
@@ -42,8 +32,8 @@ class DataTransformation:
         return words, y
 
     def avg_word2vec(self, doc):
-        vectors = [self.word2vec_model[word] for word in doc if word in self.word2vec_model.key_to_index]
-        return np.mean(vectors, axis=0) if vectors else np.zeros(self.word2vec_model.vector_size)
+        vectors = [self.model[word] for word in doc if word in self.model.key_to_index]
+        return np.mean(vectors, axis=0) if vectors else np.zeros(self.model.vector_size)
     
     def preprocess_data(self):
         try:

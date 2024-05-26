@@ -1,11 +1,12 @@
 from src.spam_detection.pipeline.stage_02_data_transformation import DataTransformationPipeline
 import pandas as pd
-from src.spam_detection.utils.common import *
+from src.spam_detection.utils.load_models import load_model
 
 class Prediction:
     def __init__(self,model) -> None:
-        self.model = model
-        self.preprocess_pipeline = DataTransformationPipeline()
+        self.word2vec_model = model
+        self.model = load_model()
+        self.preprocess_pipeline = DataTransformationPipeline(self.word2vec_model)
 
     def preprocess(self, data: pd.DataFrame) -> pd.DataFrame:
         """Preprocesses the data using the DataTransformationPipeline."""

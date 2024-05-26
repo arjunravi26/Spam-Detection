@@ -63,9 +63,3 @@ def save_model(model, path):
         pickle.dump(model, file)
     logging.info(f"Model saved to {path}")
 
-@ensure_annotations
-def load_model(path):
-    with open(path, 'rb') as file:
-        word2vec_model = pickle.load(file)
-    logging.info(f"Model loaded from {path}")
-    return word2vec_model

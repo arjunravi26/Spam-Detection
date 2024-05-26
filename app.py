@@ -1,9 +1,6 @@
 from flask import Flask, render_template, request
 from main import SpamDetector
-from gensim.models import KeyedVectors
-from src.spam_detection.config.configuration import ConfiguaraionManager
-from datetime import datetime
-
+from src.spam_detection.utils.load_models import load_word2vec_model
 app = Flask(__name__)
 
 # Global variables for model and spam detector
@@ -13,18 +10,8 @@ spam_detector = None
 def load_model():
     global word2vec_model, spam_detector
     if word2vec_model is None:
-        start_time = datetime.now()
-        print(start_time)
-        print("Loading Word2Vec model...")
-        config = ConfiguaraionManager()
-        model_path_config = config.data_transformation()
-        model_path = model_path_config.model_path
-        word2vec_model = KeyedVectors.load(model_path)
-        spam_detector = SpamDetector(word2vec_model)
-        end_time = datetime.now()
-        print("Word2Vec model loaded.")
-        print(end_time)
-        print(f"Time taken {end_time-start_time}")
+        word2vec_model = load_word2vec_model()
+        spam_detector = SpamDetector(word2vec_model)    
 
 # Ensure the model is loaded when the script is executed directly
 load_model()
@@ -40,7 +27,7 @@ def check_spam():
         return "Message is empty"
     try:
         result = spam_detector.detect(msg)
-        print("Received message:", msg, " is ", result)
+        print(f"Received message: {msg} is {result}")
         return f"Your Message '{msg}' is {result}"
     except Exception as e:
         print(f"Error processing message: {e}")

@@ -15,6 +15,7 @@ class DataTransformationConfig:
     test_path:str
     validation_path:str
     model_path:str
+    tfidf_path:str
     
 @dataclass
 class ModelTrainerConfig:

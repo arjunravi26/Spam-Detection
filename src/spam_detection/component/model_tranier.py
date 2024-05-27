@@ -1,4 +1,5 @@
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 from src.spam_detection.logging import logging
 import pandas as pd
@@ -12,7 +13,7 @@ class ModelTrainer:
         
     def model_train(self):
         # Gradient Boosting
-        self.model = GradientBoostingClassifier(n_estimators=100, random_state=42)
+        self.model = SVC(kernel='linear')
         self.model.fit(self.X,self.y )
         
     def evaluate(self,data):

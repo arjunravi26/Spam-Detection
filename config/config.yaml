@@ -13,6 +13,7 @@ data_transformation:
   validation_path: artifacts/data_transformation/validation.csv
   test_path: artifacts/data_transformation/test.csv
   model_path: artifacts/data_transformation/word2vec_model.model
+  tfidf_path: artifacts/data_transformation/tfidf_vectorizer_path.pkl
 
 
 model_tranier:

@@ -26,7 +26,8 @@ class ConfiguaraionManager:
         self.data_ingestion_config = DataTransformationConfig(
             root_dir=config.root_dir,train_path = config.train_path,
             test_path = config.test_path, validation_path = config.validation_path,
-            model_path = config.model_path
+            model_path = config.model_path,
+            tfidf_path = config.tfidf_path
             
         )
         return self.data_ingestion_config

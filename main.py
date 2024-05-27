@@ -24,32 +24,32 @@ class SpamDetector:
         print(start_time)
         output = predict_pipeline.start()
         
-        # Determine the result based on the output
-        if output == True:
-            result = "Not Spam"
-        else:
-            result = "Spam"
+        # # Determine the result based on the output
+        # if output == True:
+        #     result = "Not Spam"
+        # else:
+        #     result = "Spam"
         
         end_time = datetime.now()
         print(end_time)
         time_taken = end_time - start_time
         print(f"Time taken is {time_taken}")
-        return result
+        return output
 
 
-# if __name__ == "__main__":
-#     warnings.filterwarnings("ignore")
-#     word2vec_model = load_word2vec_model()
-#     spam_dectector = SpamDetector(model=word2vec_model)
-#     spam_dectector.train()
-#     msg = input("Enter a message to check if it is spam or not: ")
-#     if not msg:
-#         msg = "Special offer just for you! Get 50% off on all products. Visit our website now!"
-#     print(spam_dectector.detect(message=msg))
-    
-
-    
 if __name__ == "__main__":
+    warnings.filterwarnings("ignore")
+    word2vec_model = load_word2vec_model()
+    spam_dectector = SpamDetector(model=word2vec_model)
+    spam_dectector.train()
+    # msg = input("Enter a message to check if it is spam or not: ")
+    # if not msg:
+    #     msg = "Special offer just for you! Get 50% off on all products. Visit our website now!"
+    # print(spam_dectector.detect(message=msg))
+    
+
+    
+# if __name__ == "__main__":
     warnings.filterwarnings("ignore")
     message_list = [
     "Get a loan approved within minutes. No credit check required. Apply now!",
@@ -76,11 +76,11 @@ if __name__ == "__main__":
 ]
 
     result_list = []
-    word2vec_model = load_word2vec_model()
-    spam_detector = SpamDetector(word2vec_model)
+    # word2vec_model = load_word2vec_model()
+    # spam_detector = SpamDetector(word2vec_model)
 
     for message in message_list:
-        output = spam_detector.detect(message=message)
+        output = spam_dectector.detect(message=message)
         result_list.append(output)
     print(result_list)
         

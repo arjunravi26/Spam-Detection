@@ -41,7 +41,7 @@ if __name__ == "__main__":
     warnings.filterwarnings("ignore")
     word2vec_model = load_word2vec_model()
     spam_dectector = SpamDetector(model=word2vec_model)
-    spam_dectector.train()
+    # spam_dectector.train()
     # msg = input("Enter a message to check if it is spam or not: ")
     # if not msg:
     #     msg = "Special offer just for you! Get 50% off on all products. Visit our website now!"
@@ -72,6 +72,9 @@ if __name__ == "__main__":
     "Hi [Your Name], Reminder! Movie night at my place tonight at 7pm. Can't wait to see you there!",
     "Instagram update: You have 2 new friend requests!",
     "Hi Arjun, I'm so sorry for missing your birthday. Let's catch up soon!",
+    'Meet',
+    'Hello',
+    'Hai',
     "We're excited to share our latest company newsletter with you! In this issue, you'll find information about our new product launch, upcoming events, and more. Click here to read the full newsletter."
 ]
 

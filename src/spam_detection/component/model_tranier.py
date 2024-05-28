@@ -4,17 +4,22 @@ from sklearn.metrics import accuracy_score
 from src.spam_detection.logging import logging
 import pandas as pd
 from src.spam_detection.utils.common import save_model
+from imblearn.over_sampling import SMOTE
+
 class ModelTrainer:
     def __init__(self,config) -> None:
          self.config = config 
     def split(self,data):
-        self.X = data.drop('output',axis=1)
-        self.y = data['output']
+        X = data.drop('output',axis=1)
+        y = data['output']
+        # Apply SMOTE to balance the dataset
+        smote = SMOTE(sampling_strategy='auto', random_state=42)
+        self.X_resampled, self.y_resampled = smote.fit_resample(X, y)
         
     def model_train(self):
         # Gradient Boosting
         self.model = SVC(kernel='linear')
-        self.model.fit(self.X,self.y )
+        # self.model.fit(self.X_resampled,self.y_resampled )
         
     def evaluate(self,data):
         X_test = data.drop('output',axis=1)

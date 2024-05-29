@@ -1,4 +1,4 @@
-from train import SpamDetector
+from train_test_model.train import SpamDetector
 import warnings
 
 if __name__ == "__main__":

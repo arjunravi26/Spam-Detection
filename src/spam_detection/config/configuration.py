@@ -1,4 +1,4 @@
-from src.spam_detection.entity import DataIngestionConfig,DataTransformationConfig,ModelTrainerConfig
+from src.spam_detection.entity import DataIngestionConfig,DataTransformationConfig,ModelTrainerConfig,TestModelConfig
 from src.spam_detection.utils.common import *
 from src.spam_detection.constant import *
 
@@ -23,21 +23,33 @@ class ConfiguaraionManager:
     def data_transformation(self) -> DataTransformationConfig:
         config = self.config.data_transformation
         create_directory([config.root_dir])
-        self.data_ingestion_config = DataTransformationConfig(
+        self.data_transformation_config = DataTransformationConfig(
             root_dir=config.root_dir,train_path = config.train_path,
             test_path = config.test_path, validation_path = config.validation_path,
             model_path = config.model_path,
             tfidf_path = config.tfidf_path
             
         )
-        return self.data_ingestion_config
+        return self.data_transformation_config
+    
     def model_trainer(self) -> ModelTrainerConfig:
         config = self.config.model_tranier
         create_directory([config.root_dir])
-        self.data_ingestion_config = ModelTrainerConfig(
+        self.model_tranier_config = ModelTrainerConfig(
             root_dir=config.root_dir,
             model_path = config.model_path
             
         )
-        return self.data_ingestion_config
+        return self.model_tranier_config
+    
+    def model_tester(self) -> TestModelConfig:
+        config = self.config.test_model
+        create_directory([config.root_dir])
+        self.test_model_config = TestModelConfig(
+            root_dir=config.root_dir,
+            test_path = config.test_path
+            
+        )
+        return self.test_model_config
+
 

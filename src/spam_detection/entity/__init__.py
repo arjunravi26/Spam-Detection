@@ -21,3 +21,9 @@ class DataTransformationConfig:
 class ModelTrainerConfig:
     root_dir:Path
     model_path:str
+    
+
+@dataclass
+class TestModelConfig:
+    root_dir:Path
+    test_path:str

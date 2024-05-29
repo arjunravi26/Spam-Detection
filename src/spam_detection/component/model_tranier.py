@@ -5,6 +5,10 @@ from src.spam_detection.logging import logging
 import pandas as pd
 from src.spam_detection.utils.common import save_model
 from imblearn.over_sampling import SMOTE
+from xgboost import XGBClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.naive_bayes import GaussianNB, MultinomialNB, BernoulliNB
+
 
 class ModelTrainer:
     def __init__(self,config) -> None:
@@ -17,9 +21,10 @@ class ModelTrainer:
         self.X_resampled, self.y_resampled = smote.fit_resample(X, y)
         
     def model_train(self):
-        # Gradient Boosting
-        self.model = SVC(kernel='linear')
-        # self.model.fit(self.X_resampled,self.y_resampled )
+        self.model = SVC(kernel='rbf')
+        self.model.fit(self.X_resampled, self.y_resampled)
+        logging.info("SVC Model Trained")
+
         
     def evaluate(self,data):
         X_test = data.drop('output',axis=1)

@@ -19,3 +19,8 @@ data_transformation:
 model_tranier:
   root_dir: artifacts/model_tranier
   model_path: artifacts/model_tranier/rf_model.pkl
+
+# After traning the model completly test using unseen data
+test_model:
+  root_dir: artifacts/test_model
+  test_path: artifacts/test_model/test.scv

@@ -1,6 +1,6 @@
 ## End-to-End Spam Detection Using Word2Vec and SVC
 
-This project presents an end-to-end solution for message spam detection, leveraging Google's pretrained average Word2Vec model for vectorization and a Support Vector Classifier (SVC). The model is meticulously designed to achieve high accuracy in identifying spam messages. The key components of the project include:
+This project presents an end-to-end solution for message spam detection, leveraging Google's pretrained average Word2Vec model for vectorization and a Support Vector Classifier (SVC). The model is designed to achieve high accuracy in identifying spam messages. The key components of the project include:
 
 - **Data Preprocessing**: Comprehensive text cleaning, tokenization, and handling of missing values to ensure data quality.
 - **Feature Extraction**: Utilization of the average Word2Vec model for effective vectorization of text data.
